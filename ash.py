@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#coding=utf-8
 import os;
 import getpass;
 import sys;
@@ -26,18 +26,13 @@ f.close();
 
 def commer(comm):
     if comm == 'exit':
-            sys.exit();
+        sys.exit();
     elif comm.find('cd ') == 0:
         kv = comm.split(' ',1);
         if os.path.exists(kv[1]):
             os.chdir(kv[1]);
         else:
-            kvs = kv[1].split('&&',1);
-            if os.path.exists(kvs[0].strip(' ')) == True:
-                os.chdir(kvs[0].strip(' '));
-                os.system(kvs[1]);
-            else:
-                print('cd: 目录 %s 不存在'%kvs[0]);
+            print('cd: 目录 %s 不存在'%kv[1]);
     elif comm in comms:
             os.system(comms[comm]);
     else:
@@ -54,6 +49,12 @@ print('当前目录：'+cwd);
 while True:
     try:
         comm = input('>>> ');
-        commer(comm);
+        if comm.find('&&') > 0:
+            eachs = comm.split('&&');
+            for each in eachs:
+                each = each.strip();
+                commer(each);
+        else:
+            commer(comm);
     except Exception as e:
-        print('Something Error happened...'+e);
+        print('Caught Error:'+e);
