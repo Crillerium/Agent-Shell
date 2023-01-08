@@ -26,6 +26,7 @@ f.close();
 
 def commer(comm):
     if comm == 'exit':
+        print('已退出');
         sys.exit();
     elif comm.find('cd ') == 0:
         kv = comm.split(' ',1);
@@ -57,4 +58,5 @@ while True:
         else:
             commer(comm);
     except Exception as e:
-        print('Caught Error:'+e);
+        print("\r操作异常,已自动退出",e);
+        sys.exit();
