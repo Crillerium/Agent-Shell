@@ -58,5 +58,5 @@ while True:
         else:
             commer(comm);
     except Exception as e:
-        print("\r操作异常,已自动退出",e);
+        print("\r输入异常,已自动退出",e);
         sys.exit();
